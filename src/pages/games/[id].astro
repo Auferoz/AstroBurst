@@ -1,0 +1,156 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { getSheetGameBy, getSheetGamesAPI } from '../../services/sheets'
+
+export const prerender = false // Server
+
+const { id } = Astro.params
+
+let game: any
+
+if (id) {
+    game = await getSheetGameBy({ id })
+}
+
+---
+
+
+
+<Layout title={`Game | ${game[0].title}`}>
+    <article class="flex flex-row items-center">
+
+        <div class="max-w-sm">
+            <picture>
+                <img class="w-full border-2 border-white rounded-lg" src={game[0].poster} alt="Image Poster">
+            </picture>
+        </div>
+
+        <div class="w-1/2 px-12">
+            <h1 class="flex items-center text-3xl font-nunito pb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 13a3 3 0 1 0 0 -6a3 3 0 0 0 0 6z"></path>
+                    <path d="M6.201 18.744a4 4 0 0 1 3.799 -2.744h4a4 4 0 0 1 3.798 2.741"></path>
+                    <path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z"></path>
+                 </svg>
+                {game[0].title}
+            </h1>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M9 6l11 0"></path>
+                    <path d="M9 12l11 0"></path>
+                    <path d="M9 18l11 0"></path>
+                    <path d="M5 6l0 .01"></path>
+                    <path d="M5 12l0 .01"></path>
+                    <path d="M5 18l0 .01"></path>
+                 </svg>
+                Genre: <span class="font-light pl-2">{game[0].genre}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                    <path d="M16 3l0 4"></path>
+                    <path d="M8 3l0 4"></path>
+                    <path d="M4 11l16 0"></path>
+                    <path d="M8 15h2v2h-2z"></path>
+                 </svg>
+                Released: <span class="font-light pl-2">{game[0].released}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h2"></path>
+                    <path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z"></path>
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                 </svg>
+                Companie: <span class="font-light pl-2">{game[0].companie}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                    <path d="M6.5 5c7.72 2.266 10.037 7.597 12.5 12.5"></path>
+                    <path d="M17.5 5c-7.72 2.266 -10.037 7.597 -12.5 12.5"></path>
+                 </svg>
+                Platform Name: <span class="font-light pl-2">{game[0].platform_name}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                 </svg>
+                Rating: <span class="font-light pl-2">{game[0].rating}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M8 21l8 0"></path>
+                    <path d="M12 17l0 4"></path>
+                    <path d="M7 4l10 0"></path>
+                    <path d="M17 4v8a5 5 0 0 1 -10 0v-8"></path>
+                    <path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                    <path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                 </svg>
+                Achievements: <span class="font-light px-2">{game[0].achievements_obt}</span> / <span class="font-light pl-2">{game[0].achievements_ttl}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 7v5l2 2"></path>
+                    <path d="M17 22l5 -3l-5 -3z"></path>
+                    <path d="M13.017 20.943a9 9 0 1 1 7.831 -7.292"></path>
+                 </svg>
+                Hours Played: <span class="font-light pl-2">{game[0].hours_mttf}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                    <path d="M16 3v4"></path>
+                    <path d="M8 3v4"></path>
+                    <path d="M4 11h16"></path>
+                    <path d="M16 19h6"></path>
+                    <path d="M19 16v6"></path>
+                 </svg>
+                Date Start: <span class="font-light pl-2">{game[0].date_start}</span>
+            </p>
+            <p class="flex text-xl font-nunito font-normal pb-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                    <path d="M16 3v4"></path>
+                    <path d="M8 3v4"></path>
+                    <path d="M4 11h16"></path>
+                    <path d="M12 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                 </svg>
+                Last Dayplay: <span class="font-light pl-2">{game[0].last_dayplay}</span>
+            </p>
+            
+            <div class="flex-start flex h-4 w-full overflow-hidden rounded bg-blue-gray-50 font-sans text-xs font-medium bg-slate-700">
+                <div
+                  class="flex px-2 h-full items-baseline justify-center overflow-hidden break-all bg-sky-500 text-white"
+                  style={`width:${game[0].any}%`}
+                >
+                    {game[0].any}% Completed
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full flex flex-row">
+            <picture>
+                <img class="w-max rounded-xl px-2" src={game[0].image} alt="Image Capture">
+            </picture>
+            <picture>
+                <img class="w-max rounded-xl px-2" src={game[0].image} alt="Image Capture">
+            </picture>
+            <picture>
+                <img class="w-max rounded-xl px-2" src={game[0].image} alt="Image Capture">
+            </picture>
+        </div>
+
+    </article>
+
+    
+</Layout>
