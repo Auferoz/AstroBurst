@@ -12,9 +12,9 @@ export type APICardResponse = {
     video:            string;
     color:            Color;
     status:           Status;
-    any:              string;
-    achievements_obt: string;
-    achievements_ttl: string;
+    any:              number;
+    achievements_obt: number;
+    achievements_ttl: number;
     hours_mttf:       string;
     hltb_mainyextra:  string;
     hltb_full:        string;
@@ -22,8 +22,7 @@ export type APICardResponse = {
     date_mainstory:   string;
     date_completed:   DateCompleted;
     last_dayplay:     string;
-    trueAchievements: string;
-    square:           string;
+    user_uuid:        string;
 }
 
 export enum Color {
@@ -46,5 +45,5 @@ export enum PlatformIcon {
 export enum Status {
     Active = "active",
     Inactive = "inactive",
-    MainStory = "main story",
+    MainStory = "main_story",
 }

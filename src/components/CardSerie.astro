@@ -1,0 +1,27 @@
+---
+import { getSheetSeriesAPI } from '../services/sheets';
+import CardSerieView from './CardSerieView.astro';
+
+const dataSort = await getSheetSeriesAPI()
+---
+
+
+<div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7">
+	{dataSort.map((datos: any) => (
+		<CardSerieView
+        id={datos.id}
+        title={datos.title}
+        seasons={datos.seasons}
+        episodes={datos.episodes}
+        released={datos.released}
+        total_runtime={datos.total_runtime}
+        genre={datos.genre}
+        rating={datos.rating} 
+        watch={datos.watch}
+        view_start={datos.view_start}
+        view_end={datos.view_end}
+        poster={datos.poster}
+        user_uuid={datos.user_uuid}
+		/>
+	))}
+</div>

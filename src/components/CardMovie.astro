@@ -1,0 +1,25 @@
+---
+import { getSheetMoviesAPI } from '../services/sheets';
+import CardMovieView from './CardMovieView.astro';
+
+const dataSort = await getSheetMoviesAPI()
+---
+
+
+<div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7">
+	{dataSort.map((datos: any) => (
+		<CardMovieView
+        id={datos.id}
+        title={datos.title}
+        released={datos.released}
+        runtime={datos.runtime}
+        genre={datos.genre}
+        rating={datos.rating}
+        watch={datos.watch}
+        view={datos.view}
+        poster={datos.poster}
+        image={datos.image}
+        user_uuid={datos.user_uuid}
+		/>
+	))}
+</div>

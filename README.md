@@ -1,4 +1,4 @@
-# Burst web - echo con Astro 3.0
+# Burst web - con Astro 3.0
 
 
 > 🧑‍🚀 **Mu Burst** pronto para MuOnline!

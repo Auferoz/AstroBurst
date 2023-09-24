@@ -1,113 +1,28 @@
 ---
-interface Props {
-  id: string;
-  title: string;
-  poster: string;
-  status: keyof typeof statusGame;
-  genre: string;
-  released: string;
-  companie: string;
-  platform_name: string;
-  rating: string;
-  achievements_obt: string;
-  achievements_ttl: string;
-  hours_mttf: string;
-  date_start: string;
-  last_dayplay: string;
-}
+import CardGameView from './CardGameView.astro';
+import { getSheetGamesAPI } from '../services/sheets';
 
-const {
-  id,
-  title,
-  poster,
-  status,
-  genre,
-  released,
-  companie,
-  platform_name,
-  rating,
-  achievements_obt,
-  achievements_ttl,
-  hours_mttf,
-  date_start,
-  last_dayplay,
-} = Astro.props;
-
-let statusGame = {
-    main_story  : "border-green-600",
-    inactive    : "border-yellow-600",
-    active      : "border-sky-600",
-    abadoned    : "border-red-600",
-    completed   : "border-sky-800"
-};
-
-const gamesStatus = statusGame[status];
-
+const dataSort = await getSheetGamesAPI()
 ---
 
-<article>
-  <a href={`/games/${id}`}>
-    <div
-      class={`group relative rounded-md leading-5 overflow-hidden transition-all 
-        duration-300 ease-linear border-2 `+gamesStatus}
-    >
-      <picture>
-        <img
-          src={poster}
-          width="100%"
-          class="scale-100 transition-all duration-300 ease-linear
-                    group-hover:scale-125 group-hover:rounded-md group-hover:transition-all group-hover:duration-300 group-hover:ease-linear"
-        />
-    </picture>
-      <div
-        class="w-full absolute bottom-0 left-0 pt-28 px-3 pb-1 transition-all duration-300 ease-linear
-                bg-gradient-to-b from-gray-700/5 to-blue-950/90 to-100%
-                group-hover:from-gray-700/5 group-hover:to-blue-950/95 group-hover:to-50%
-                group-hover:transition-all group-hover:duration-300 group-hover:ease-linear"
-      >
-        <div class="items-center justify-between py-2 px-0">
-          <div class="left-content">
-            <h3
-              class="font-nunito text-white m-0 font-semibold text-lg truncate w-48
-                            group-hover:whitespace-normal group-hover:overflow-visible items-center"
-            >
-              {title}
-            </h3>
-            <p
-              class="font-sans text-cyan-400 m-0 font-normal text-xs capitalize truncate w-48
-                            group-hover:whitespace-normal group-hover:overflow-visible"
-            >
-              {released} - <span> {companie}</span>
-            </p>
-          </div>
-        </div>
-        <div
-          class="max-h-0 opacity-0 border-t-2 border-gray-500/30 overflow-hidden transition-all duration-300 ease-linear
-                    group-hover:max-h-52 group-hover:opacity-100 group-hover:py-2 group-hover:px-0"
-        >
-          <p class="flex font-nunito text-white text-xs m-0 pb-1 truncate">
-            Genres: {genre}
-          </p>
-          <p class="flex font-nunito text-white text-xs m-0 pb-1 truncate">
-            Platform: {platform_name}
-          </p>
-          <p class="flex font-nunito text-white text-xs m-0 pb-1 truncate">
-            Rating: {rating}
-          </p>
-          <p class="flex font-nunito text-white text-xs m-0 pb-1 truncate">
-            Trophy: {achievements_obt} / {achievements_ttl}
-          </p>
-          <p class="flex font-nunito text-white text-xs m-0 pb-1 truncate">
-            Hours Played: {hours_mttf}
-          </p>
-          <p class="flex font-nunito text-white text-xs m-0 pb-1 truncate">
-            Date Start: {date_start}
-          </p>
-          <p class="flex font-nunito text-white text-xs m-0 pb-1 truncate">
-            Last Date: {last_dayplay}
-          </p>
-        </div>
-      </div>
-    </div>
-  </a>
-</article>
+
+<div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7">
+	{dataSort.map((datos: any) => (
+		<CardGameView 
+		id={datos.id}
+		title={datos.title}
+		poster={datos.poster}
+		status={datos.status}
+		genre={datos.genre}
+		released={datos.released}
+		companie={datos.companie}
+		platform_name={datos.platform_name}
+		rating={datos.rating}
+		achievements_obt={datos.achievements_obt}
+		achievements_ttl={datos.achievements_ttl}
+		hours_mttf={datos.hours_mttf}
+		date_start={datos.date_start}
+		last_dayplay={datos.last_dayplay}
+		/>
+	))}
+</div>
