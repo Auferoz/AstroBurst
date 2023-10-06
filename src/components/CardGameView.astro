@@ -45,7 +45,7 @@ const gamesStatus = statusGame[status];
 
 ---
 
-<article>
+<article transition:name=`cardGame ${id} box`>
   <a href={`/games/${id}`}>
     <div
       class={`group relative rounded-md leading-5 overflow-hidden transition-all 
@@ -53,6 +53,7 @@ const gamesStatus = statusGame[status];
     >
       <picture>
         <img
+          transition:name=`cardGame ${id} image`
           src={poster}
           width="100%"
           class="scale-100 transition-all duration-300 ease-linear

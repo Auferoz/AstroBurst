@@ -37,11 +37,15 @@ const gameScreen = dataScreen.results;
 
 
 <Layout title={`Game | ${game[0].title}`}>
-    <article class="flex flex-row items-center border-b pb-10">
+    <article class="flex flex-row items-center border-b pb-10" transition:name=`cardGame ${id} box`>
 
         <div class="max-w-sm">
             <picture>
-                <img class="w-full border-2 border-white rounded-lg" src={game[0].poster} alt="Image Poster">
+                <img 
+                    transition:name=`cardGame ${id} image`
+                    class="w-full border-2 border-white rounded-lg" 
+                    src={game[0].poster} 
+                    alt="Image Poster">
             </picture>
         </div>
 
