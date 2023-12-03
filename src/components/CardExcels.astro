@@ -1,0 +1,27 @@
+---
+import CardExcelsView from './CardExcelsView.astro';
+import { getSheetExcelsAPI } from '../services/sheets';
+
+const dataSort = await getSheetExcelsAPI()
+---
+
+<div class="grid gap-5 grid-cols-[repeat(auto-fill,_minmax(230px,_1fr))] grid-rows-[repeat(auto_fill,_345px)]">
+	{dataSort.map((datos: any) => (
+		<CardExcelsView 
+		id={datos.id}
+		title={datos.title}
+		poster={datos.poster}
+		status={datos.status}
+		genre={datos.genre}
+		released={datos.released}
+		companie={datos.companie}
+		platform_name={datos.platform_name}
+		rating={datos.rating}
+		achievements_obt={datos.achievements_obt}
+		achievements_ttl={datos.achievements_ttl}
+		hours_mttf={datos.hours_mttf}
+		date_start={datos.date_start}
+		last_dayplay={datos.last_dayplay}
+		/>
+	))}
+</div>

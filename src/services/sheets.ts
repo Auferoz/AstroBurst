@@ -19,6 +19,36 @@ export const getSheetGameBy = async ({id}: { id: string}) => {
 }
 
 
+export const getSheetExcelsAPI = async () => {
+	const res = await fetch('https://zngbyevysduygxbinfor.supabase.co/rest/v1/GamesP_2023?select=*', {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			"apikey": apikey,
+			"Authorization": "Bearer " + apikey
+		},
+	})
+	const data = (await res.json()) as APICardResponse[]
+	const dataSort = data.sort((a, b) => b.id - a.id);
+
+	return dataSort
+}
+
+export const getSheetExcelsAPIDOS = async () => {
+	const res = await fetch('https://zngbyevysduygxbinfor.supabase.co/rest/v1/GamesP_2023?select=*', {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			"apikey": apikey,
+			"Authorization": "Bearer " + apikey
+		},
+	})
+	const data = (await res.json()) as APICardResponse[]
+	const dataSort = data.sort((a, b) => b.id - a.id);
+
+	return dataSort
+}
+
 export const getSheetGamesAPI = async () => {
 	const res = await fetch('https://zngbyevysduygxbinfor.supabase.co/rest/v1/GamesP_2023?select=*', {
 		method: "GET",

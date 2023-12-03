@@ -1,0 +1,69 @@
+---
+import ExcelsViews from './ExcelsViews.astro';
+import { getSheetExcelsAPIDOS } from '../services/sheets';
+
+const dataSort = await getSheetExcelsAPIDOS()
+---
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="text-center px-3 py-3">
+                   ID
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Title
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Released
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Genre
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Platform Name
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Rating
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Achievements Obtenidos
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Achievements Total
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Hours mttf
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Date Start
+                </th>
+                <th scope="col" class="text-center px-3 py-3">
+                    Last Dayplay
+                </th>
+        </thead>
+        <tbody>
+            {dataSort.map((datos: any) => (
+                <ExcelsViews 
+                id={datos.id}
+                title={datos.title}
+                poster={datos.poster}
+                status={datos.status}
+                genre={datos.genre}
+                released={datos.released}
+                companie={datos.companie}
+                platform_name={datos.platform_name}
+                rating={datos.rating}
+                achievements_obt={datos.achievements_obt}
+                achievements_ttl={datos.achievements_ttl}
+                hours_mttf={datos.hours_mttf}
+                date_start={datos.date_start}
+                last_dayplay={datos.last_dayplay}
+                />
+            ))}
+        </tbody>
+    </table>
+</div>
+
+

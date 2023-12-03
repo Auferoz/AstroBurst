@@ -1,0 +1,53 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  poster: string;
+  status: keyof typeof statusGame;
+  genre: string;
+  released: string;
+  companie: string;
+  platform_name: string;
+  rating: string;
+  achievements_obt: number;
+  achievements_ttl: number;
+  hours_mttf: string;
+  date_start: string;
+  last_dayplay: string;
+}
+
+const {
+  id,
+  title,
+  poster,
+  status,
+  genre,
+  released,
+  companie,
+  platform_name,
+  rating,
+  achievements_obt,
+  achievements_ttl,
+  hours_mttf,
+  date_start,
+  last_dayplay,
+} = Astro.props;
+
+let statusGame = {
+    main_story  : "border-green-600",
+    inactive    : "border-yellow-600",
+    active      : "border-sky-600",
+    abadoned    : "border-red-600",
+    completed   : "border-sky-800"
+};
+
+const gamesStatus = statusGame[status];
+
+
+console.log(Astro.props);
+---
+
+<article transition:name=`cardGame ${id} box` class={`border-4 rounded-lg ` + gamesStatus}>
+    <!-- <h1>{title}</h1> -->
+    <img src={poster} alt={title} class="rounded-lg">
+</article>
